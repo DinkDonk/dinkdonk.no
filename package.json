@@ -1,0 +1,19 @@
+{
+  "name": "dinkdonk.no",
+  "version": "1.0.0",
+  "description": "The dinkdonk.no website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DinkDonk/dinkdonk.no.git"
+  },
+  "author": "Rune Warhuus <rune@dinkdonk.no>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DinkDonk/dinkdonk.no/issues"
+  },
+  "homepage": "https://github.com/DinkDonk/dinkdonk.no#readme"
+}

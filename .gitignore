@@ -1,0 +1,5 @@
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+bower_components
+node_modules
