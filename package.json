@@ -4,7 +4,18 @@
   "description": "The dinkdonk.no website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "node node_modules/tslint/bin/tslint --format stylish src/**/*.ts || true",
+    "build-ts": "node node_modules/browserify/bin/cmd.js src/script/main.ts -p [tsify --noImplicitAny --isolatedModules=true] > build/app.js",
+    "watch-ts": "node node_modules/watchify/bin/cmd.js src/script/main.ts -p [tsify --noImplicitAny --inlineSources] -o build/app.js",
+    "build-scss": "node-sass -q --include-path src/style src/style/main.scss build/app.css",
+    "watch-scss": "node-sass -q --watch --include-path src/style src/style/main.scss build/app.css",
+    "build-scheme": "cp -rf src/script/dinkdonk-scheme/dinkdonk-scheme.js build/ && node tools/replace-in-file.js build/dinkdonk-scheme.js INJECT_CSS node_modules/dinkdonk-scheme/ace/dinkdonk.css",
+    "build-templates": "mkdir -p build && rsync -a src/templates/* build/",
+    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && mkdir -p build/vs && rsync -a node_modules/monaco-editor/min/vs build",
+    "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-templates && npm run build-scss && npm run move-assets",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss",
+    "publish": "git subtree push --prefix build origin gh-pages"
   },
   "repository": {
     "type": "git",
@@ -15,5 +26,19 @@
   "bugs": {
     "url": "https://github.com/DinkDonk/dinkdonk.no/issues"
   },
-  "homepage": "https://github.com/DinkDonk/dinkdonk.no#readme"
+  "homepage": "https://github.com/DinkDonk/dinkdonk.no#readme",
+  "devDependencies": {
+    "@types/node": "^7.0.5",
+    "brace": "^0.9.1",
+    "browser-sync": "^2.18.5",
+    "browserify": "^13.1.1",
+    "dinkdonk-scheme": "DinkDonk/dinkdonk-scheme",
+    "node-sass": "~3.7.0",
+    "replace-in-file": "^2.2.2",
+    "source-map-support": "^0.4.11",
+    "tsify": "^2.0.7",
+    "tslint": "^4.2.0",
+    "typescript": "^2.1.4",
+    "watchify": "^3.9.0"
+  }
 }

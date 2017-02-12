@@ -3,3 +3,5 @@ Thumbs.db
 *.sublime-workspace
 bower_components
 node_modules
+typings
+build
