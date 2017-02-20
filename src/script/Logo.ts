@@ -225,10 +225,13 @@ export default class Logo {
 		this.points = this.offsetAndScalePoints();
 
 		let endPoints:Array<Vector2> = [];
+		let startTensions:Array<Vector1> = [];
 		let endTensions:Array<Vector1> = [];
 
 		for (let i in this.tensions) {
-			endTensions[i] = new Vector1(this.tensions[i].x);
+			startTensions.push(new Vector1(0));
+			endTensions.push(new Vector1(this.tensions[i].x));
+
 			this.tensions[i].x = 0;
 		}
 
@@ -260,6 +263,15 @@ export default class Logo {
 				.easing(elasticOutTight)
 				.delay(1000 + i * 100)
 				.start();
+
+				let tween2 = new TWEEN.Tween(this.tensions[i])
+				.to(startTensions[i], 1000)
+				.easing(TWEEN.Easing.Elastic.Out)
+				.delay(4000)
+				.repeat(Infinity)
+				.yoyo(true);
+
+				tween.chain(tween2);
 			}
 
 			let tween1 = new TWEEN.Tween(this.points[this.points.length - 1])
@@ -280,12 +292,21 @@ export default class Logo {
 
 			for (let i = 0, l = this.tensions.length; i < l; i++) {
 				let tween = new TWEEN.Tween(this.tensions[i])
-				.to(endTensions[i], 4000)
+				.to(endTensions[i], 4500)
 				.easing(TWEEN.Easing.Elastic.Out)
 				.delay(500 + i * 40)
 				// .repeat(Infinity)
 				// .yoyo(true)
 				.start();
+
+				let tween2 = new TWEEN.Tween(this.tensions[i])
+				.to(startTensions[i], 1000)
+				.easing(TWEEN.Easing.Elastic.Out)
+				.delay(2000)
+				.repeat(Infinity)
+				.yoyo(true);
+
+				tween.chain(tween2);
 			}
 
 			for (let i = 0, l = this.points.length; i < l; i++) {
