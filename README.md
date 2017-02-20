@@ -3,8 +3,8 @@ dinkdonk.no
 
 The dinkdonk.no website.
 
-### Publishing
+### Deploying
 
 ```bash
-$ npm run publish
+$ npm run deploy
 ```

@@ -11,11 +11,11 @@
     "watch-scss": "node-sass -q --watch --include-path src/style src/style/main.scss build/app.css",
     "build-scheme": "cp -rf src/script/dinkdonk-scheme/dinkdonk-scheme.js build/ && node tools/replace-in-file.js build/dinkdonk-scheme.js INJECT_CSS node_modules/dinkdonk-scheme/ace/dinkdonk.css",
     "build-templates": "mkdir -p build && rsync -a src/templates/* build/",
-    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && mkdir -p build/vs && rsync -a node_modules/monaco-editor/min/vs build",
+    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build",
     "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-templates && npm run build-scss && npm run move-assets",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss",
-    "publish": "git subtree push --prefix build origin gh-pages"
+    "deploy": "npm run build && git checkout -b gh-pages && git add -f build && git commit -m 'Deploy to gh-pages' && git push origin `git subtree split --prefix build`:gh-pages --force && git checkout master && git branch -D gh-pages"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/DinkDonk/dinkdonk.no#readme",
   "devDependencies": {
     "@types/node": "^7.0.5",
+    "@types/tween.js": "0.0.31",
     "brace": "^0.9.1",
     "browser-sync": "^2.18.5",
     "browserify": "^13.1.1",
@@ -38,6 +39,7 @@
     "source-map-support": "^0.4.11",
     "tsify": "^2.0.7",
     "tslint": "^4.2.0",
+    "tween.js": "^16.6.0",
     "typescript": "^2.1.4",
     "watchify": "^3.9.0"
   }
