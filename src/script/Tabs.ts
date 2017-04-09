@@ -1,9 +1,13 @@
 import TabsEventEmitter from './TabsEventEmitter';
 
+console.log('Tabs');
+
 export default class Tabs {
 	private tabs:NodeList;
 
 	constructor() {
+		console.log('Tabs constructor');
+
 		this.tabs = document.querySelectorAll('[tab-controls]');
 
 		for (var i = 0, l = this.tabs.length; i < l; i++) {

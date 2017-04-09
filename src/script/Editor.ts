@@ -9,6 +9,8 @@ import EventEmitter = require('events');
 type editorModes = 'javascript' | 'typescript' | 'css' | 'html';
 type editorEvents = 'change' | 'changeLinting';
 
+console.log('Editor');
+
 export default class Editor {
 	public editor:ace.Editor;
 	private eventEmitter:EventEmitter = new EventEmitter();

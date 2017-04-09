@@ -3,7 +3,7 @@ import Editor from './Editor';
 import * as ts from 'typescript';
 import TabsEventEmitter from './TabsEventEmitter';
 
-export default class EditorView {
+class EditorView {
 	private scriptEditor:Editor;
 	private styleEditor:Editor;
 	private markupEditor:Editor;
@@ -16,9 +16,9 @@ export default class EditorView {
 		this.outputDocument = (document.getElementById('output') as HTMLIFrameElement).contentWindow.document;
 
 		// Create editors
-		this.initscriptEditor();
-		this.initstyleEditor();
-		this.initmarkupEditor();
+		this.initScriptEditor();
+		this.initStyleEditor();
+		this.initMarkupEditor();
 
 		TabsEventEmitter.instance.on('selected', (tabContentId:string) => {
 			if (/script/.test(tabContentId)) {
@@ -38,7 +38,7 @@ export default class EditorView {
 		new Tabs();
 	}
 
-	private initscriptEditor():void {
+	private initScriptEditor():void {
 		this.scriptEditor = new Editor('script-editor', 'typescript');
 
 		this.scriptEditor.on('change', (event:any) => {
@@ -75,7 +75,7 @@ function aFunction(request, result, callback) {
 
 	}
 
-	private initstyleEditor():void {
+	private initStyleEditor():void {
 		this.styleEditor = new Editor('style-editor', 'css');
 
 		this.styleEditor.value = `body {
@@ -96,7 +96,7 @@ function aFunction(request, result, callback) {
 		});
 	}
 
-	private initmarkupEditor():void {
+	private initMarkupEditor():void {
 		this.markupEditor = new Editor('markup-editor', 'html');
 
 		this.markupEditor.value = `<!DOCTYPE html>
@@ -159,3 +159,5 @@ function aFunction(request, result, callback) {
 		this.outputDocument.close();
 	}
 }
+
+export = new EditorView();
