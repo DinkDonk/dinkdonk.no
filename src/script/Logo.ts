@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file max-line-length */
+
 import * as TWEEN from 'tween.js';
 
 interface Vector1Interface {
@@ -7,11 +9,11 @@ interface Vector1Interface {
 interface Vector2Interface extends Vector1Interface {
 	x:number;
 	y:number;
-	add(v:Vector2Interface | number):Vector2Interface;
-	subtract(v:Vector2Interface | number):Vector2Interface;
 	normalized:Vector2Interface;
 	reversed:Vector2Interface;
 	magnitude:number;
+	add(v:Vector2Interface | number):Vector2Interface;
+	subtract(v:Vector2Interface | number):Vector2Interface;
 	dotProduct(v:Vector2Interface | number):number;
 	crossProduct(v:Vector2Interface | number):number;
 	multiply(v:Vector2Interface | number):Vector2Interface;
@@ -57,8 +59,8 @@ class Vector2 implements Vector2Interface {
 	}
 
 	public get normalized():Vector2 {
-		let magitude:number = this.magnitude;
-		return new Vector2(this.x / magitude, this.y / magitude);
+		const magnitude:number = this.magnitude;
+		return new Vector2(this.x / magnitude, this.y / magnitude);
 	}
 
 	public get magnitude():number {
@@ -118,12 +120,12 @@ class Vector3 implements Vector3Interface {
 	}
 }
 
-type Bezier = {
-	startPoint:Vector2,
-	startControlPoint:Vector2,
-	endPoint:Vector2,
-	endControlPoint:Vector2
-};
+interface Bezier {
+	startPoint:Vector2;
+	startControlPoint:Vector2;
+	endPoint:Vector2;
+	endControlPoint:Vector2;
+}
 
 export default class Logo {
 	private canvas:HTMLCanvasElement;
@@ -131,18 +133,18 @@ export default class Logo {
 	private padding:number = 100;
 	private offset:Vector2;
 	private scale:number;
-	private points:Array<Vector2>;
-	private tensions:Array<Vector1>;
-	private tensionsObjArr:Array<Object>;
+	private points:Vector2[];
+	private tensions:Vector1[];
+	// private tensionsObjArr:Array<Object>;
 
 	constructor() {
-		let colors = [
+		const colors = [
 			'#b6a997',
 			'#eb175e',
 			'#70cff6'
 		];
 
-		let color = colors[Math.floor(Math.random() * colors.length)];
+		const color = colors[Math.floor(Math.random() * colors.length)];
 
 		(document.querySelector('.loader') as HTMLElement).style.backgroundColor = color;
 
@@ -161,7 +163,7 @@ export default class Logo {
 			this.offset.y = (this.canvas.height / 3) / this.scale;
 		}
 
-		let anchors:Array<Vector3> = [
+		const anchors:Vector3[] = [
 			// start
 			new Vector3(-this.offset.x, 0, 0.3),
 			// d
@@ -217,54 +219,60 @@ export default class Logo {
 		this.points = [];
 		this.tensions = [];
 
-		for (let i in anchors) {
-			this.points.push(new Vector2(anchors[i].x, anchors[i].y));
-			this.tensions.push(new Vector1(anchors[i].z));
+		for (const i in anchors) {
+			if (anchors.hasOwnProperty(i)) {
+				this.points.push(new Vector2(anchors[i].x, anchors[i].y));
+				this.tensions.push(new Vector1(anchors[i].z));
+			}
 		}
 
 		this.points = this.offsetAndScalePoints();
 
-		let endPoints:Array<Vector2> = [];
-		let startTensions:Array<Vector1> = [];
-		let endTensions:Array<Vector1> = [];
+		const endPoints:Vector2[] = [];
+		const startTensions:Vector1[] = [];
+		const endTensions:Vector1[] = [];
 
-		for (let i in this.tensions) {
-			startTensions.push(new Vector1(0));
-			endTensions.push(new Vector1(this.tensions[i].x));
+		for (const i in this.tensions) {
+			if (this.tensions.hasOwnProperty(i)) {
+				startTensions.push(new Vector1(0));
+				endTensions.push(new Vector1(this.tensions[i].x));
 
-			this.tensions[i].x = 0;
+				this.tensions[i].x = 0;
+			}
 		}
 
 		if (Math.random() > 0.5) {
 			// Falling string from the roof
 
-			for (let i in this.points) {
-				endPoints[i] = new Vector2(this.points[i].x, this.points[i].y);
-				this.points[i].y = -5;
+			for (const i in this.points) {
+				if (this.points.hasOwnProperty(i)) {
+					endPoints[i] = new Vector2(this.points[i].x, this.points[i].y);
+					this.points[i].y = -5;
+				}
 			}
 
 			for (let i = 0, l = this.tensions.length; i < l; i++) {
-				let tween = new TWEEN.Tween(this.tensions[i])
+				const tween = new TWEEN.Tween(this.tensions[i])
 				.to(endTensions[i], 4000)
 				.easing(TWEEN.Easing.Elastic.Out)
 				.delay(500 + i * 100)
 				.start();
 			}
 
-			let tween00 = new TWEEN.Tween(this.points[0])
+			const tween00 = new TWEEN.Tween(this.points[0])
 			.to(endPoints[0], 1000)
 			.easing(TWEEN.Easing.Elastic.Out)
 			.delay(1000)
 			.start();
 
 			for (let i = 1, l = this.points.length - 1; i < l; i++) {
-				let tween = new TWEEN.Tween(this.points[i])
+				const tween = new TWEEN.Tween(this.points[i])
 				.to(endPoints[i], 1000)
 				.easing(elasticOutTight)
 				.delay(1000 + i * 100)
 				.start();
 
-				let tween2 = new TWEEN.Tween(this.tensions[i])
+				const tween2 = new TWEEN.Tween(this.tensions[i])
 				.to(startTensions[i], 1000)
 				.easing(TWEEN.Easing.Elastic.Out)
 				.delay(4000)
@@ -274,7 +282,7 @@ export default class Logo {
 				tween.chain(tween2);
 			}
 
-			let tween1 = new TWEEN.Tween(this.points[this.points.length - 1])
+			const tween1 = new TWEEN.Tween(this.points[this.points.length - 1])
 			.to(endPoints[endPoints.length - 1], 1000)
 			.easing(TWEEN.Easing.Elastic.Out)
 			.delay(1000 + (endPoints.length - 1) * 100)
@@ -282,16 +290,18 @@ export default class Logo {
 		} else {
 			// Up from the line
 
-			for (let i in this.points) {
-				endPoints[i] = new Vector2(this.points[i].x, this.points[i].y);
-				this.points[i].x = this.points[i].x + (this.canvas.width * 0.05);
-				this.points[i].y = this.offset.multiply(this.scale).y;
+			for (const i in this.points) {
+				if (this.points.hasOwnProperty(i)) {
+					endPoints[i] = new Vector2(this.points[i].x, this.points[i].y);
+					this.points[i].x = this.points[i].x + (this.canvas.width * 0.05);
+					this.points[i].y = this.offset.multiply(this.scale).y;
+				}
 			}
 
 			this.points[0].x = 0;
 
 			for (let i = 0, l = this.tensions.length; i < l; i++) {
-				let tween = new TWEEN.Tween(this.tensions[i])
+				const tween = new TWEEN.Tween(this.tensions[i])
 				.to(endTensions[i], 4500)
 				.easing(TWEEN.Easing.Elastic.Out)
 				.delay(500 + i * 40)
@@ -299,7 +309,7 @@ export default class Logo {
 				// .yoyo(true)
 				.start();
 
-				let tween2 = new TWEEN.Tween(this.tensions[i])
+				const tween2 = new TWEEN.Tween(this.tensions[i])
 				.to(startTensions[i], 1000)
 				.easing(TWEEN.Easing.Elastic.Out)
 				.delay(2000)
@@ -310,7 +320,7 @@ export default class Logo {
 			}
 
 			for (let i = 0, l = this.points.length; i < l; i++) {
-				let tween = new TWEEN.Tween(this.points[i])
+				const tween = new TWEEN.Tween(this.points[i])
 				.to(endPoints[i], 1700)
 				.easing(elasticOutTight)
 				.delay(1000 + i * 40)
@@ -335,13 +345,15 @@ export default class Logo {
 		this.draw();
 	}
 
-	private offsetAndScalePoints():Array<Vector2> {
-		let points:Array<Vector2> = [];
+	private offsetAndScalePoints():Vector2[] {
+		const points:Vector2[] = [];
 
-		for (let i in this.points) {
-			let point = this.points[i];
+		for (const i in this.points) {
+			if (this.points.hasOwnProperty(i)) {
+				const point = this.points[i];
 
-			points.push(new Vector2((point.x + this.offset.x) * this.scale, (point.y + this.offset.y) * this.scale));
+				points.push(new Vector2((point.x + this.offset.x) * this.scale, (point.y + this.offset.y) * this.scale));
+			}
 		}
 
 		return points;
@@ -356,29 +368,29 @@ export default class Logo {
 	}
 
 	private draw():void {
-		let canvas = this.canvas;
-		let context = this.context;
-		let points = this.points;
-		let tensions = this.tensions;
-		let beziers:Array<Bezier> = [];
+		const canvas = this.canvas;
+		const context = this.context;
+		const points = this.points;
+		const tensions = this.tensions;
+		const beziers:Bezier[] = [];
 
 		for (let i = 1, l = points.length - 1; i < l; i++) {
-			let p0:Vector2 = points[i - 1];
-			let p1:Vector2 = points[i];
-			let p2:Vector2 = points[i + 1];
-			let q0Distance:number = p1.subtract(p0).magnitude;
-			let q1Distance:number = p2.subtract(p1).magnitude;
-			let tension = tensions[i].x;
-			let fa:number = tension * q0Distance / (q0Distance + q1Distance);
-			let fb:number = tension - fa;
-			let q0:Vector2 = p1.add(p0.subtract(p2).multiply(fa));
-			let q1:Vector2 = p1.subtract(p0.subtract(p2).multiply(fb));
+			const p0:Vector2 = points[i - 1];
+			const p1:Vector2 = points[i];
+			const p2:Vector2 = points[i + 1];
+			const q0Distance:number = p1.subtract(p0).magnitude;
+			const q1Distance:number = p2.subtract(p1).magnitude;
+			const tension = tensions[i].x;
+			const fa:number = tension * q0Distance / (q0Distance + q1Distance);
+			const fb:number = tension - fa;
+			const q0:Vector2 = p1.add(p0.subtract(p2).multiply(fa));
+			const q1:Vector2 = p1.subtract(p0.subtract(p2).multiply(fb));
 
 			beziers.push({
-				startPoint: p0,
-				startControlPoint:q1,
+				endControlPoint: q0,
 				endPoint: p1,
-				endControlPoint: q0
+				startControlPoint:q1,
+				startPoint: p0
 			});
 		}
 
@@ -390,7 +402,7 @@ export default class Logo {
 		context.quadraticCurveTo(beziers[0].endControlPoint.x, beziers[0].endControlPoint.y, points[1].x, points[1].y);
 
 		for (let i = 1, l = beziers.length; i < l; i++) {
-			context.bezierCurveTo(beziers[i - 1].startControlPoint.x, beziers[i-1].startControlPoint.y, beziers[i].endControlPoint.x, beziers[i].endControlPoint.y, beziers[i].endPoint.x, beziers[i].endPoint.y);
+			context.bezierCurveTo(beziers[i - 1].startControlPoint.x, beziers[i - 1].startControlPoint.y, beziers[i].endControlPoint.x, beziers[i].endControlPoint.y, beziers[i].endPoint.x, beziers[i].endPoint.y);
 		}
 
 		context.quadraticCurveTo(beziers[beziers.length - 1].startControlPoint.x, beziers[beziers.length - 1].startControlPoint.y, points[points.length - 1].x, points[points.length - 1].y);

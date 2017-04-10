@@ -3,9 +3,16 @@
 		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "Node",
-		"outDir": "build"
+		"outDir": "build",
+		"lib": [
+			"DOM",
+			"ES2016"
+		]
 	},
-	"filesGlob": [
+	"include": [
 		"src/**/*.ts"
+	],
+	"exclude": [
+		"src/projects/**/*.ts"
 	]
 }

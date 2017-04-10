@@ -5,12 +5,10 @@ export default class LazyLoader {
 		}
 
 		await new Promise((resolve, reject) => {
-			let scriptElement:HTMLScriptElement = document.createElement('script');
+			const scriptElement:HTMLScriptElement = document.createElement('script');
 			scriptElement.src = path;
 
 			scriptElement.addEventListener('load', () => {
-				console.log('Loaded!');
-
 				resolve();
 			});
 

@@ -1,6 +1,7 @@
-import Tabs from './Tabs';
-import Editor from './Editor';
 import * as ts from 'typescript';
+import Editor from './Editor';
+import RemoteFileReader from './RemoteFileReader';
+import Tabs from './Tabs';
 import TabsEventEmitter from './TabsEventEmitter';
 
 class EditorView {
@@ -19,6 +20,9 @@ class EditorView {
 		this.initScriptEditor();
 		this.initStyleEditor();
 		this.initMarkupEditor();
+
+		// Load default project
+		this.loadProject('./projects/welcome');
 
 		TabsEventEmitter.instance.on('selected', (tabContentId:string) => {
 			if (/script/.test(tabContentId)) {
@@ -42,12 +46,10 @@ class EditorView {
 		this.scriptEditor = new Editor('script-editor', 'typescript');
 
 		this.scriptEditor.on('change', (event:any) => {
-			console.log('Script changed!');
-
-			let transpileOutput:ts.TranspileOutput = ts.transpileModule(this.scriptEditor.value, {
+			const transpileOutput:ts.TranspileOutput = ts.transpileModule(this.scriptEditor.value, {
 				compilerOptions: {
-					target: ts.ScriptTarget.ES5,
-					module: ts.ModuleKind.CommonJS
+					module: ts.ModuleKind.ES2015,
+					target: ts.ScriptTarget.ES5
 				}
 			});
 
@@ -55,38 +57,13 @@ class EditorView {
 
 			this.render();
 		});
-
-		this.scriptEditor.value = `// This is a comment. It is a nice comment. Comments are awesome
-const A_NUMBER:Number = 1234;
-
-let aString:string = 'Hello Sailor!';
-let aBoolean:boolean = true;
-let anObject:object = {
-	property: 'I am a string value'
-};
-
-function aFunction(request, result, callback) {
-	if (request.code !== 0) {
-		console.log(anObject.property, Date.now());
-	} else {
-		callback();
-	}
-}`;
-
 	}
 
 	private initStyleEditor():void {
 		this.styleEditor = new Editor('style-editor', 'css');
 
-		this.styleEditor.value = `body {
-	padding: 30px;
-	color: #303840;
-}`;
-
 		this.styleEditor.on('changeLinting', (event:any) => {
-			console.log('Style changed!');
-
-			let annotations:Array<any> = this.styleEditor.annotations;
+			const annotations:any[] = this.styleEditor.annotations;
 
 			if (annotations.length < 1) {
 				this.lastGoodStyleEditorValue = this.styleEditor.value;
@@ -99,24 +76,9 @@ function aFunction(request, result, callback) {
 	private initMarkupEditor():void {
 		this.markupEditor = new Editor('markup-editor', 'html');
 
-		this.markupEditor.value = `<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
-
-	<link rel="stylesheet" type="text/css" href="/app.css">
-</head>
-<body>
-	<h1>Hello, Sailor!</h1>
-</body>
-</html>`;
-
 		this.markupEditor.on('changeLinting', (event:any) => {
-			console.log('Markup changed!');
-
-			let annotations:Array<any> = this.styleEditor.annotations;
-			let l:number = annotations.length;
+			const annotations:any[] = this.styleEditor.annotations;
+			const l:number = annotations.length;
 			let i:number = l;
 
 			while (i--) {
@@ -138,8 +100,6 @@ function aFunction(request, result, callback) {
 	}
 
 	private render():void {
-		console.log('Rendering');
-
 		let output:string = this.lastGoodMarkupEditorValue;
 
 		if (!output) {
@@ -157,6 +117,20 @@ function aFunction(request, result, callback) {
 		this.outputDocument.open();
 		this.outputDocument.write(output);
 		this.outputDocument.close();
+	}
+
+	private loadProject(path:string):void {
+		RemoteFileReader.read(path + '/script.ts').then((data) => {
+			this.scriptEditor.value = data;
+		});
+
+		RemoteFileReader.read(path + '/style.css').then((data) => {
+			this.styleEditor.value = data;
+		});
+
+		RemoteFileReader.read(path + '/markup.html').then((data) => {
+			this.markupEditor.value = data;
+		});
 	}
 }
 

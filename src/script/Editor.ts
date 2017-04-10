@@ -1,15 +1,13 @@
 import * as ace from 'brace';
-import 'brace/mode/javascript';
-import 'brace/mode/typescript';
 import 'brace/mode/css';
 import 'brace/mode/html';
+import 'brace/mode/javascript';
+import 'brace/mode/typescript';
 import '../../build/dinkdonk-scheme';
 import EventEmitter = require('events');
 
 type editorModes = 'javascript' | 'typescript' | 'css' | 'html';
 type editorEvents = 'change' | 'changeLinting';
-
-console.log('Editor');
 
 export default class Editor {
 	public editor:ace.Editor;
@@ -22,7 +20,7 @@ export default class Editor {
 		});
 		this.editor.setTheme('ace/theme/dinkdonk');
 
-		let session:ace.IEditSession = this.editor.getSession();
+		const session:ace.IEditSession = this.editor.getSession();
 		session.setUseWrapMode(true);
 		session.setWrapLimitRange(null, null);
 
@@ -59,11 +57,11 @@ export default class Editor {
 		this.editor.clearSelection();
 	}
 
-	public get annotations():Array<any> {
+	public get annotations():any[] {
 		return this.editor.getSession().getAnnotations() || [];
 	}
 
-	public set annotations(annotations:Array<any>) {
+	public set annotations(annotations:any[]) {
 		this.editor.getSession().setAnnotations(annotations);
 	}
 
@@ -71,11 +69,11 @@ export default class Editor {
 		this.editor.focus();
 	}
 
-	public on(event:editorEvents, listener:Function):void {
+	public on(event:editorEvents, listener:(event:any) => void):void {
 		this.eventEmitter.addListener(event, listener);
 	}
 
-	public off(event:editorEvents, listener:Function):void {
+	public off(event:editorEvents, listener:(event:any) => void):void {
 		this.eventEmitter.removeListener(event, listener);
 	}
 }

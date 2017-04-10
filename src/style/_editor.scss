@@ -1,33 +1,30 @@
 div.ace_editor {
 	position: absolute;
-	width: 60%;
+	width: 100%;
+	height: 100px;
 	height: calc(100% - 60px);
-	top: 60px;
 	left: 0;
+	top: 60px;
 	font-family: 'Operator Mono Book';
 	font-size: 22px;
 }
 
-#ts-editor {
+#script-editor {
 
 }
 
-#scss-editor {
+#style-editor {
+
+}
+
+#markup-editor {
 
 }
 
 #console {
-	position: absolute;
-	width: 40%;
-	height: 100%;
-	right: 0;
-	top: 0;
 	background-color: $color1;
-	overflow: hidden;
 
 	iframe {
-		width: 100%;
-		height: 100%;
 		border: none;
 	}
 }

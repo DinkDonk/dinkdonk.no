@@ -15,8 +15,8 @@ if (process.argv.length < 5) {
 
 const options = {
 	files: fileToChange,
-	replace: new RegExp(replaceRegexp),
-	with: String(fs.readFileSync(fileToInject)).replace(/\n/g, '\\\n')
+	from: new RegExp(replaceRegexp),
+	to: String(fs.readFileSync(fileToInject)).replace(/\n/g, '\\\n')
 };
 
 replace(options)

@@ -49,7 +49,8 @@
 			"multiline": "never",
 			"singleline": "never"
 		}],
-		"no-unused-new": false
+		"no-unused-expression": false,
+		"interface-name": [true, "never-prefix"]
 	},
 	"rulesDirectory": [
 		/*
