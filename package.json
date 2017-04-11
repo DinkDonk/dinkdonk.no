@@ -12,7 +12,7 @@
     "build-scheme": "cp -rf src/script/dinkdonk-scheme/dinkdonk-scheme.js build/ && node tools/replace-in-file.js build/dinkdonk-scheme.js INJECT_CSS node_modules/dinkdonk-scheme/ace/dinkdonk.css",
     "build-markup": "mkdir -p build && rsync -a src/markup/* build/",
     "watch-markup": "node node_modules/onchange/cli.js 'src/markup/*' -- npm run build-markup",
-    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && rsync -a src/projects build && echo 'github.dinkdonk.no' > build/CNAME",
+    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && rsync -a src/projects build",
     "watch-assets": "node node_modules/onchange/cli.js 'assets/**/*' 'src/projects/**/*' -- npm run move-assets",
     "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-markup && npm run build-scss && npm run move-assets",
     "test": "npm run lint",
