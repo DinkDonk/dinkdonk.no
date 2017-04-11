@@ -12,14 +12,14 @@
     "build-scheme": "cp -rf src/script/dinkdonk-scheme/dinkdonk-scheme.js build/ && node tools/replace-in-file.js build/dinkdonk-scheme.js INJECT_CSS node_modules/dinkdonk-scheme/ace/dinkdonk.css",
     "build-markup": "mkdir -p build && rsync -a src/markup/* build/",
     "watch-markup": "node node_modules/onchange/cli.js 'src/markup/*' -- npm run build-markup",
-    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && rsync -a src/projects build",
+    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && rsync -a src/projects build && echo 'github.dinkdonk.no' > build/CNAME",
     "watch-assets": "node node_modules/onchange/cli.js 'assets/**/*' 'src/projects/**/*' -- npm run move-assets",
     "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-markup && npm run build-scss && npm run move-assets",
     "test": "npm run lint",
     "serve": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss & npm run watch-markup & npm run watch-assets",
     "serve-no-watch": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build'",
     "create-project": "./tools/create-project.sh",
-    "deploy": "npm run build && git checkout -b gh-pages && git add -f build && git commit -m 'Deploy to gh-pages' && git push origin `git subtree split --prefix build`:gh-pages --force && git checkout master && git branch -D gh-pages"
+    "deploy": "./tools/deploy.sh"
   },
   "repository": {
     "type": "git",
