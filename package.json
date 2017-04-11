@@ -18,6 +18,7 @@
     "test": "npm run lint",
     "serve": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss & npm run watch-markup & npm run watch-assets",
     "serve-no-watch": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build'",
+    "create-project": "./tools/create-project.sh",
     "deploy": "npm run build && git checkout -b gh-pages && git add -f build && git commit -m 'Deploy to gh-pages' && git push origin `git subtree split --prefix build`:gh-pages --force && git checkout master && git branch -D gh-pages"
   },
   "repository": {
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/DinkDonk/dinkdonk.no#readme",
   "devDependencies": {
+    "@types/lodash.throttle": "^4.1.2",
     "@types/node": "^7.0.12",
     "@types/tween.js": "0.0.31",
     "brace": "^0.10.0",
@@ -38,6 +40,7 @@
     "browserify": "^14.3.0",
     "dinkdonk-scheme": "DinkDonk/dinkdonk-scheme",
     "es6-promise": "^4.1.0",
+    "lodash.throttle": "^4.1.1",
     "node-sass": "^4.5.2",
     "onchange": "^3.2.1",
     "replace-in-file": "^2.5.0",

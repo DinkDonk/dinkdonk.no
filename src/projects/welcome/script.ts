@@ -1,4 +1,12 @@
-// This is a comment. It is a nice comment. Comments are awesome
+/*
+ *	Welcome!
+ *
+ *	DinkDonk is a full stack developer.
+ *	What better way to show it than with
+ *	some beautifully formated code? 🤓
+ *
+*/
+
 const A_NUMBER:number = 1234;
 
 let aString:string = 'Hello Sailor!';

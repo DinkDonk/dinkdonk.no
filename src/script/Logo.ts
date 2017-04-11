@@ -135,7 +135,6 @@ export default class Logo {
 	private scale:number;
 	private points:Vector2[];
 	private tensions:Vector1[];
-	// private tensionsObjArr:Array<Object>;
 
 	constructor() {
 		const colors = [
