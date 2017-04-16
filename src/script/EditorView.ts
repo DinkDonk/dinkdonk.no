@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 import Editor from './Editor';
 import RemoteFileReader from './RemoteFileReader';
-import RouterEventEmitter from './RouterEventEmitter';
 import Router from './Router';
+import RouterEventEmitter from './RouterEventEmitter';
 import {Route} from './routes';
 import Tabs from './Tabs';
 import TabsEventEmitter from './TabsEventEmitter';
