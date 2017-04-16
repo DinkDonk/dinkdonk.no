@@ -1,3 +1,4 @@
+import Client = require('./Client');
 import LazyLoader from './LazyLoader';
 import Logo from './Logo';
 
@@ -14,16 +15,18 @@ class App {
 
 		const loadStarted:number = Date.now();
 
-		LazyLoader.load('./EditorView').then(() => {
-			const timeSinceLoadStarted:number = Date.now() - loadStarted;
-			const timeLeftOnIntroDuration:number = this.introDuration - timeSinceLoadStarted;
+		if (!Client.isMobileDevice()) {
+			LazyLoader.load('./EditorView').then(() => {
+				const timeSinceLoadStarted:number = Date.now() - loadStarted;
+				const timeLeftOnIntroDuration:number = this.introDuration - timeSinceLoadStarted;
 
-			if (timeLeftOnIntroDuration > 0) {
-				setTimeout(this.initEditorView, timeLeftOnIntroDuration);
-			} else {
-				this.initEditorView();
-			}
-		});
+				if (timeLeftOnIntroDuration > 0) {
+					setTimeout(this.initEditorView, timeLeftOnIntroDuration);
+				} else {
+					this.initEditorView();
+				}
+			});
+		}
 	}
 
 	private initEditorView():void {

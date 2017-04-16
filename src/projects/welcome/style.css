@@ -61,6 +61,7 @@ li {
 	visibility: hidden;
 	opacity: 0;
 	font-size: 30px;
+	color: #b6a997;
 	transform: translate3d(0, 20px, 0);
 	transition: all 1s;
 }
