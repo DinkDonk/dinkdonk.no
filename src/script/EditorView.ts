@@ -1,6 +1,9 @@
 import * as ts from 'typescript';
 import Editor from './Editor';
 import RemoteFileReader from './RemoteFileReader';
+import RouterEventEmitter from './RouterEventEmitter';
+import Router from './Router';
+import {Route} from './routes';
 import Tabs from './Tabs';
 import TabsEventEmitter from './TabsEventEmitter';
 
@@ -22,7 +25,12 @@ class EditorView {
 		this.initMarkupEditor();
 
 		// Load default project
-		this.loadProject('./projects/welcome');
+		this.loadProject('./projects/' + Router.instance.currentRoute[1]);
+
+		// Listen for project URLs
+		RouterEventEmitter.instance.on('route', (route:string[]) => {
+			this.loadProject('./projects/' + route[1]);
+		});
 
 		TabsEventEmitter.instance.on('selected', (tabContentId:string) => {
 			if (/script/.test(tabContentId)) {
@@ -77,7 +85,7 @@ class EditorView {
 		this.markupEditor = new Editor('markup-editor', 'html');
 
 		this.markupEditor.on('changeLinting', (event:any) => {
-			const annotations:any[] = this.styleEditor.annotations;
+			const annotations:any[] = this.markupEditor.annotations;
 			const l:number = annotations.length;
 			let i:number = l;
 
@@ -120,16 +128,23 @@ class EditorView {
 	}
 
 	private loadProject(path:string):void {
+		this.lastGoodScriptEditorValue = null;
+		this.lastGoodStyleEditorValue = null;
+		this.lastGoodMarkupEditorValue = null;
+
 		RemoteFileReader.read(path + '/script.ts').then((data) => {
 			this.scriptEditor.value = data;
+			this.scriptEditor.editor.session.setScrollTop(0);
 		});
 
 		RemoteFileReader.read(path + '/style.css').then((data) => {
 			this.styleEditor.value = data;
+			this.scriptEditor.editor.session.setScrollTop(0);
 		});
 
 		RemoteFileReader.read(path + '/markup.html').then((data) => {
 			this.markupEditor.value = data;
+			this.scriptEditor.editor.session.setScrollTop(0);
 		});
 	}
 }

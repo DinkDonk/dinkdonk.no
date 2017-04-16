@@ -7,7 +7,7 @@ export default class TabsEventEmitter extends EventEmitter {
 		super();
 	}
 
-	public static get instance() {
+	public static get instance():TabsEventEmitter {
 		return this._instance || (this._instance = new this());
 	}
 }

@@ -31,12 +31,20 @@ main {
 	align-content: flex-start;
 }
 
+main p {
+	margin: auto;
+	margin-top: 15px;
+	text-align: center;
+}
+
 header {
 	flex: 1 100%;
 }
 
-section {
-	height: 150px;
+canvas {
+	margin: auto;
+	/*border: 2px solid #b6a997;*/
+	background-color: #94d7a6;
 }
 
 p {
@@ -48,25 +56,4 @@ p {
 a {
 	color: #70cff6;
 	text-decoration: none;
-}
-
-ul {
-	position: relative;
-	list-style: none;
-	padding: 0;
-}
-
-li {
-	position: absolute;
-	visibility: hidden;
-	opacity: 0;
-	font-size: 30px;
-	transform: translate3d(0, 20px, 0);
-	transition: all 1s;
-}
-
-.active {
-	visibility: visible;
-	opacity: 1;
-	transform: none;
 }

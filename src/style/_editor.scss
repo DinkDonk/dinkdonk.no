@@ -42,3 +42,21 @@ div.ace_editor {
 .ace-dinkdonk .ace_variable.ace_type {
 	color: $color7;
 }
+
+.ace_scrollbar {
+	&::-webkit-scrollbar-track {
+		border-radius: 6px;
+		background-color: $color10;
+	}
+
+	&::-webkit-scrollbar {
+		width: 12px;
+		background-color: $color10;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 8px;
+		background-color: $color9;
+		border: 2px solid $color10;
+	}
+}

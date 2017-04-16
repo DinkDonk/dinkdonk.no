@@ -7,18 +7,28 @@
  *
 */
 
-const A_NUMBER:number = 1234;
+const projectLogoElements:NodeList = document.querySelectorAll('li');
 
-let aString:string = 'Hello Sailor!';
-let aBoolean:boolean = true;
-let anObject:any = {
-	property: 'I am a string value'
-};
+function showProjectLogo(index:number):void {
+	const logoElement:HTMLElement = <HTMLElement>projectLogoElements[index];
 
-function aFunction(request, result, callback) {
-	if (request.code !== 0) {
-		console.log(anObject.property, Date.now());
-	} else {
-		callback();
+	for (let element of <HTMLElement[]><any>projectLogoElements) {
+		element.classList.remove('active');
 	}
+
+	logoElement.classList.add('active');
 }
+
+let index:number = 0;
+
+setInterval(() => {
+	index++;
+
+	if (index >= projectLogoElements.length) {
+		index = 0;
+	}
+
+	showProjectLogo(index);
+}, 2000);
+
+showProjectLogo(index);
