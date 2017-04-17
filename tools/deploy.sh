@@ -2,9 +2,11 @@
 
 cd "${BASH_SOURCE%/*}/../" || exit
 
+DOMAIN=$(node -e "console.log(require('./package.json').domain);")
+
 npm run build
 
-echo 'github.dinkdonk.no' > build/CNAME
+echo $DOMAIN > build/CNAME
 echo 'google-site-verification: googleab6fe5ea20df429c.html' > build/googleab6fe5ea20df429c.html
 
 git checkout -b gh-pages

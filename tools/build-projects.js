@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path');
 const fs = require('fs-extra');
 const projetcsPath = 'src/projects/';
@@ -33,8 +35,6 @@ const markupInject =
 `;
 
 for (const project of projects) {
-	console.log(project);
-
 	fs.copySync(projetcsPath + project, 'build/projects/' + project, {
 		overwrite: true
 	});
