@@ -1,6 +1,6 @@
 {
   "name": "dinkdonk.no",
-  "domain": "github.dinkdonk.no",
+  "domain": "dinkdonk.no",
   "version": "1.0.0",
   "description": "The dinkdonk.no website",
   "main": "index.js",

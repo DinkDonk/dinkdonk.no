@@ -54,6 +54,9 @@ class App {
 
 		// Set up controls
 		document.addEventListener('keydown', (event:KeyboardEvent) => {
+			event.preventDefault();
+			event.stopPropagation();
+
 			const previousDirection = this.segments[0].direction;
 
 			switch (event.key) {
