@@ -6,6 +6,16 @@ const projects = fs.readdirSync(projetcsPath).filter((file) => fs.statSync(path.
 
 const markupInject =
 `
+	<footer>
+		<h3>Looking for help on your next project?</h3>
+
+		<p>
+			Call me at <a href="phone:+47 976 17 050">+47 976 17 050</a><br>
+			shoot me an e-mail at <a href="mailto:rune@dinkdonk.no">rune@dinkdonk.no</a><br>
+			or hook up on <a href="https://www.linkedin.com/in/rune-warhuus-59b64989/" target="_blank">LinkedIn</a>
+		</p>
+	</footer>
+
 	<script>
 		var siteAnchors = document.querySelectorAll('a[href^="#"]');
 

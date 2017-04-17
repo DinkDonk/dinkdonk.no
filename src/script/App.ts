@@ -26,12 +26,20 @@ class App {
 					this.initEditorView();
 				}
 			});
+		} else {
+			setTimeout(() => {
+				this.initMobileView();
+			}, 4000);
 		}
 	}
 
 	private initEditorView():void {
 		document.querySelector('.app').classList.remove('hidden');
 		document.querySelector('.loader').classList.add('hidden');
+	}
+
+	private initMobileView():void {
+		document.querySelector('.visible-mobile').classList.remove('hidden');
 	}
 }
 

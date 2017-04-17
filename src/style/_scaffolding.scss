@@ -6,6 +6,11 @@ html, body {
 	box-sizing: border-box;
 }
 
+a {
+	color: $color1;
+	text-decoration: none;
+}
+
 .hidden {
 	visibility: hidden;
 	opacity: 0;
@@ -26,6 +31,64 @@ html, body {
 		top: 0;
 		width: 100%;
 		height: 100%;
+	}
+}
+
+.visible-mobile {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 30px;
+	padding-bottom: 120px;
+	box-sizing: border-box;
+	border: 0.5vw solid $color2;
+	border-bottom: none;
+	color: $color9;
+	transform: translate(20%, 60px) rotate(-15deg);
+	transition: visibility 1s ease-out, opacity 1s ease-out, transform 1s cubic-bezier(0.5, 1.3, 0, 1);
+
+	p {
+		font-size: 2vh;
+		width: 80%;
+		max-width: 600px;
+	}
+
+	h1,
+	h3 {
+		color: $color2;
+		width: 80%;
+	}
+
+	h1 {
+		font-size: 2.5vh;
+	}
+
+	h3 {
+		font-size: 2vh;
+	}
+
+	&.hidden {
+		transform: translate(20%, 100%) rotate(-30deg);
+	}
+
+	@media screen and (orientation:landscape) {
+		display: flex;
+		width: 100%;
+		padding-bottom: 170px;
+		transform: translate(10%, 70px) rotate(-7.5deg);
+
+		h1 {
+			font-size: 2vw;
+		}
+
+		h3 {
+			font-size: 1.5vw;
+		}
+
+		p {
+			width: 90%;
+			font-size: 1.5vw;
+		}
 	}
 }
 

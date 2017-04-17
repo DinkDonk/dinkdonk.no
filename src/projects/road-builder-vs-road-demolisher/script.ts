@@ -54,6 +54,8 @@ class App {
 
 		// Set up controls
 		document.addEventListener('keydown', (event:KeyboardEvent) => {
+			const previousDirection = this.segments[0].direction;
+
 			switch (event.key) {
 				case 'ArrowUp':
 					this.segments[0].direction = Direction.UP;
@@ -72,7 +74,9 @@ class App {
 					break;
 			}
 
-			this.turningPoints.push({...this.segments[0]});
+			if (this.segments[0].direction !== previousDirection) {
+				this.turningPoints.push({...this.segments[0]});
+			}
 		});
 
 		// Start game loop
