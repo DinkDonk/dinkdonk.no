@@ -5,6 +5,7 @@ cd "${BASH_SOURCE%/*}/../" || exit
 npm run build
 
 echo 'github.dinkdonk.no' > build/CNAME
+echo 'google-site-verification: googleab6fe5ea20df429c.html' > build/googleab6fe5ea20df429c.html
 
 git checkout -b gh-pages
 git add -f build
