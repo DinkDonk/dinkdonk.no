@@ -7,6 +7,13 @@
  *
 */
 
+enum Key {
+	UP = 38,
+	DOWN = 40,
+	LEFT = 37,
+	RIGHT = 39
+};
+
 enum Direction {
 	UP,
 	DOWN,
@@ -59,20 +66,20 @@ class App {
 
 			const previousDirection = this.segments[0].direction;
 
-			switch (event.key) {
-				case 'ArrowUp':
+			switch (event.keyCode) {
+				case Key.UP:
 					this.segments[0].direction = Direction.UP;
 					break;
 
-				case 'ArrowDown':
+				case Key.DOWN:
 					this.segments[0].direction = Direction.DOWN;
 					break;
 
-				case 'ArrowLeft':
+				case Key.LEFT:
 					this.segments[0].direction = Direction.LEFT;
 					break;
 
-				case 'ArrowRight':
+				case Key.RIGHT:
 					this.segments[0].direction = Direction.RIGHT;
 					break;
 			}
