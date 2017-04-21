@@ -8,7 +8,7 @@ require('es6-promise').polyfill();
 /* tslint:enable:no-var-requires */
 
 class App {
-	private introDuration:number = 0; //8000;
+	private introDuration:number = 8000;
 
 	constructor() {
 		new Logo();
