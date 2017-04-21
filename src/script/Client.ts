@@ -3,5 +3,5 @@ function isMobileDevice() {
 	}
 
 export = {
-	isMobileDevice: isMobileDevice
+	isMobileDevice
 };

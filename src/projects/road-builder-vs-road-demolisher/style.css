@@ -56,3 +56,29 @@ a {
 	color: #70cff6;
 	text-decoration: none;
 }
+
+code {
+	display: block;
+	position: relative;
+	margin: auto;
+	margin-top: 30px;
+	padding: 15px;
+	font-family: 'Operator Mono Book';
+	font-style: normal;
+	background-color: #f7f06f;
+	transform: rotate(-2deg);
+	z-index: 1;
+}
+
+code:before {
+	content: "Code tips\A" "˜˜˜˜˜˜˜˜˜";
+	white-space: pre;
+	display: block;
+	margin-bottom: 10px;
+	font-style: italic;
+	color: #39686b;
+}
+
+code i {
+	color: #8d4ca1;
+}

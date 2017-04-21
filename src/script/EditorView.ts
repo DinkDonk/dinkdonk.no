@@ -14,10 +14,10 @@ class EditorView {
 	private lastGoodScriptEditorValue:string;
 	private lastGoodStyleEditorValue:string;
 	private lastGoodMarkupEditorValue:string;
-	private outputDocument:HTMLDocument;
+	private outputElement:HTMLElement;
 
 	constructor() {
-		this.outputDocument = (document.getElementById('output') as HTMLIFrameElement).contentWindow.document;
+		this.outputElement = document.getElementById('console') as HTMLElement;
 
 		// Create editors
 		this.initScriptEditor();
@@ -122,9 +122,13 @@ class EditorView {
 			output = output.replace('</body>', '<script>' + this.lastGoodScriptEditorValue + '</script></body>');
 		}
 
-		this.outputDocument.open();
-		this.outputDocument.write(output);
-		this.outputDocument.close();
+		this.outputElement.innerHTML = '<iframe id="output" src="about:blank"></iframe>';
+
+		const outputDocument = (this.outputElement.querySelector('#output') as HTMLIFrameElement).contentWindow.document;
+
+		outputDocument.open();
+		outputDocument.write(output);
+		outputDocument.close();
 	}
 
 	private loadProject(path:string):void {
