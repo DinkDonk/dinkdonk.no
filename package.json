@@ -1,7 +1,7 @@
 {
   "name": "dinkdonk.no",
   "domain": "dinkdonk.no",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The dinkdonk.no website",
   "main": "index.js",
   "scripts": {
@@ -12,20 +12,20 @@
     "watch-scss": "node-sass -q --watch --include-path src/style src/style/main.scss build/app.css",
     "build-scheme": "cp -rf src/script/dinkdonk-scheme/dinkdonk-scheme.js build/ && node tools/replace-in-file.js build/dinkdonk-scheme.js INJECT_CSS node_modules/dinkdonk-scheme/ace/dinkdonk.css",
     "build-markup": "mkdir -p build && rsync -a src/markup/* build/",
-    "watch-markup": "node node_modules/onchange/cli.js 'src/markup/*' -- npm run build-markup",
-    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && npm run generate-favicon",
-    "watch-assets": "node node_modules/onchange/cli.js 'assets/**/*' -- npm run move-assets",
-    "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-markup && npm run build-scss && npm run build-projects && npm run move-assets && npm run generate-favicon && npm run generate-sitemap",
-    "test": "npm run lint",
-    "serve": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss & npm run watch-markup & npm run watch-projects & npm run watch-assets",
-    "serve-no-watch": "node node_modules/browser-sync/bin/browser-sync.js start --server 'build' --files 'build'",
+    "watch-markup": "node node_modules/onchange/cli.js 'src/markup/*' -- yarn run build-markup",
+    "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && yarn run generate-favicon",
+    "watch-assets": "node node_modules/onchange/cli.js 'assets/**/*' -- yarn run move-assets",
+    "build": "mkdir -p build && yarn run build-scheme && yarn run build-ts && yarn run build-markup && yarn run build-scss && yarn run build-projects && yarn run move-assets && yarn run generate-favicon && yarn run generate-sitemap",
+    "test": "yarn run lint",
+    "serve": "node node_modules/browser-sync/dist/bin.js start --server 'build' --files 'build' & yarn run watch-ts & yarn run watch-scss & yarn run watch-markup & yarn run watch-projects & yarn run watch-assets",
+    "serve-no-watch": "node node_modules/browser-sync/dist/bin.js start --server 'build' --files 'build'",
     "create-project": "./tools/create-project.sh",
     "build-projects": "node tools/build-projects.js",
-    "watch-projects": "node node_modules/onchange/cli.js 'src/projects/**/*' -- npm run build-projects",
+    "watch-projects": "node node_modules/onchange/cli.js 'src/projects/**/*' -- yarn run build-projects",
     "generate-favicon": "./tools/generate-favicon.sh",
     "generate-sitemap": "node ./tools/generate-sitemap.js",
     "deploy": "./tools/deploy.sh",
-    "start": "npm run serve"
+    "start": "yarn run serve"
   },
   "repository": {
     "type": "git",

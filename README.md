@@ -3,26 +3,32 @@ dinkdonk.no
 
 The dinkdonk.no website.
 
+### Installing
+
+```bash
+$ yarn install
+```
+
 ### Building
 
 ```bash
-$ npm run build
+$ yarn run build
 ```
 
 ### Local serve and watch
 
 ```bash
-$ npm run serve
+$ yarn run serve
 ```
 
 ### Create a new project
 
 ```bash
-$ npm run create-project [project_name]
+$ yarn run create-project [project_name]
 ```
 
 ### Deploying
 
 ```bash
-$ npm run deploy
+$ yarn run deploy
 ```
