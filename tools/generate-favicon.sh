@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Requires GraphicsMagick
+# Requires GraphicsMagick and Inkscape
 
 cd "${BASH_SOURCE%/*}" || exit
 

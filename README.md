@@ -5,6 +5,12 @@ The dinkdonk.no website.
 
 ### Installing
 
+Install Inkscape and GraphicsMagick
+
+```bash
+$ brew tap homebrew/cask && brew cask install inkscape && brew install graphicsmagick
+```
+
 ```bash
 $ yarn install
 ```
