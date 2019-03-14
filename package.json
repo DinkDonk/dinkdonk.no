@@ -1,7 +1,7 @@
 {
   "name": "dinkdonk.no",
   "domain": "dinkdonk.no",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "The dinkdonk.no website",
   "main": "index.js",
   "scripts": {

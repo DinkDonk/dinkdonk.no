@@ -24,7 +24,7 @@ export default class Router {
 		}
 
 		// Clean path of all protocols, domain and ports
-		path = path.replace(/http:\/\/.+?\//, '');
+		path = path.replace(/https?:\/\/.+?\//, '');
 
 		const route:Route = routes.filter((value:Route) => {
 			if (value.path === path) {
