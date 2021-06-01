@@ -1,6 +1,6 @@
 /* tslint:disable:max-classes-per-file max-line-length */
 
-import * as TWEEN from 'tween.js';
+import * as TWEEN from '@tweenjs/tween.js';
 
 interface Vector1Interface {
 	x:number;

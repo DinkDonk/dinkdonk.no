@@ -8,33 +8,33 @@ The dinkdonk.no website.
 Install Inkscape and GraphicsMagick
 
 ```bash
-$ brew tap homebrew/cask && brew cask install inkscape && brew install graphicsmagick
+$ brew tap homebrew/cask && brew install inkscape && brew install imagemagick
 ```
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
 ### Building
 
 ```bash
-$ yarn run build
+$ npm run build
 ```
 
 ### Local serve and watch
 
 ```bash
-$ yarn run serve
+$ npm run serve
 ```
 
 ### Create a new project
 
 ```bash
-$ yarn run create-project [project_name]
+$ npm run create-project [project_name]
 ```
 
 ### Deploying
 
 ```bash
-$ yarn run deploy
+$ npm run deploy
 ```

@@ -4,7 +4,7 @@ export default class LazyLoader {
 			path += '.js';
 		}
 
-		await new Promise((resolve, reject) => {
+		await new Promise<void>((resolve, reject) => {
 			const scriptElement:HTMLScriptElement = document.createElement('script');
 			scriptElement.src = path;
 
