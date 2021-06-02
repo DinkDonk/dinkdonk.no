@@ -1,6 +1,6 @@
 function isMobileDevice() {
-		return (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
-	}
+	return (typeof window.orientation !== 'undefined') || (navigator.userAgent.indexOf('IEMobile') !== -1);
+}
 
 export = {
 	isMobileDevice

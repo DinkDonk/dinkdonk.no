@@ -11,6 +11,10 @@ a {
 	text-decoration: none;
 }
 
+.preload * {
+	transition: none !important;
+}
+
 .hidden {
 	visibility: hidden;
 	opacity: 0;

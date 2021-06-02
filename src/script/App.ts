@@ -13,6 +13,8 @@ class App {
 	constructor() {
 		new Logo();
 
+		document.body.classList.remove('preload');
+
 		const loadStarted:number = Date.now();
 
 		if (!Client.isMobileDevice()) {
