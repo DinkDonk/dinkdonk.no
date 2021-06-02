@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="/app.css">
+</head>
+<body>
+	<main>
+		<header>
+			<h1>Let's play!</h1>
+		</header>
+
+		<canvas width="320" height="320"></canvas>
+
+		<p>Click the play area and control with arrow keys</p>
+
+		<code>Try cranking the speed up to <i>10</i> in the code!</code>
+	</main>
+
+	<!--[if IE]-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.js"></script>
+	<!--[endif]-->
+
+	<footer>
+		<h3>Looking for help on your next project?</h3>
+
+		<p>
+			Call me at <a href="phone:+47 976 17 050">+47 976 17 050</a><br>
+			shoot me an e-mail at <a href="mailto:rune@dinkdonk.no">rune@dinkdonk.no</a><br>
+			or hook up on <a href="https://www.linkedin.com/in/rune-warhuus-59b64989/" target="_blank">LinkedIn</a>
+		</p>
+	</footer>
+
+	<script>
+		var siteAnchors = document.querySelectorAll('a[href^="#"]');
+
+		for (var i = 0, l = siteAnchors.length; i < l; i++) {
+			siteAnchors[i].addEventListener('click', function (event) {
+				event.preventDefault();
+
+				parent.postMessage({
+					type: 'goto',
+					route: event.target.href
+				}, '*');
+			});
+		}
+	</script>
+</body>
+</html>

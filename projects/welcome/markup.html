@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" type="text/css" href="/app.css">
+</head>
+<body>
+	<main>
+		<header>
+			<h1>Welcome!</h1>
+		</header>
+
+		<article>
+			<p>DinkDonk is a full stack developer and designer.</p>
+			<p>I work on all major platforms – from the web to the smallest microcontroller.</p>
+			<p>If you are looking for a nerd of the highest order – a problem solver and a technology enthusiast – you have come to the right place!</p>
+		</article>
+
+		<article>
+			<h3>Ever wonder what makes a snake-like game tick?</h3>
+
+			<p>
+				Wonder no longer!<br>
+				Play a relaxing round of <a href="#/road-builder-vs-road-demolisher">«Road Builder vs. Road Demolisher»</a>
+				whilst you peruse the source code.
+			</p>
+		</article>
+
+		<section>
+			<h3>Some people I have worked with</h3>
+
+			<ul>
+				<li>Antenna</li>
+				<li>Apt</li>
+				<li>BilXtra</li>
+				<li>Bølgen Kulturhus</li>
+				<li>Choice Hotels</li>
+				<li>Clavis Impulse Technology</li>
+				<li>DEFA</li>
+				<li>DnB</li>
+				<li>Dugg</li>
+				<li>Electric Brandy</li>
+				<li>Feed</li>
+				<li>FrP</li>
+				<li>Funcom</li>
+				<li>Galleri Vike</li>
+				<li>Glava</li>
+				<li>Grilstad</li>
+				<li>Gyro</li>
+				<li>Hydro</li>
+				<li>INMA</li>
+				<li>Isave</li>
+				<li>Jacobs</li>
+				<li>JimmiRoyal</li>
+				<li>Jotun</li>
+				<li>Katapult Future Fest</li>
+				<li>Kerstin Florian</li>
+				<li>Krifa</li>
+				<li>Kristelig Folkeparti</li>
+				<li>Loopify</li>
+				<li>Marius Ektvedt</li>
+				<li>Misjonsalliansen</li>
+				<li>MøllerGruppen</li>
+				<li>Nidar</li>
+				<li>Nordkyn</li>
+				<li>NSB</li>
+				<li>Nyt Norge</li>
+				<li>Opera</li>
+				<li>PhatCat Studios</li>
+				<li>Pion</li>
+				<li>Plapre</li>
+				<li>Profier</li>
+				<li>Reactor Vodka</li>
+				<li>Solid Entrepenør</li>
+				<li>Statoil</li>
+				<li>Tesori</li>
+				<li>Tryg Trafikk</li>
+				<li>ULTRA</li>
+				<li>Ungom i Oppdrag</li>
+				<li>Vikingfjord</li>
+				<li>Work</li>
+			</ul>
+		</section>
+	</main>
+
+	<footer>
+		<h3>Looking for help on your next project?</h3>
+
+		<p>
+			Call me at <a href="phone:+47 976 17 050">+47 976 17 050</a><br>
+			shoot me an e-mail at <a href="mailto:rune@dinkdonk.no">rune@dinkdonk.no</a><br>
+			or hook up on <a href="https://www.linkedin.com/in/rune-warhuus-59b64989/" target="_blank">LinkedIn</a>
+		</p>
+	</footer>
+
+	<script>
+		var siteAnchors = document.querySelectorAll('a[href^="#"]');
+
+		for (var i = 0, l = siteAnchors.length; i < l; i++) {
+			siteAnchors[i].addEventListener('click', function (event) {
+				event.preventDefault();
+
+				parent.postMessage({
+					type: 'goto',
+					route: event.target.href
+				}, '*');
+			});
+		}
+	</script>
+</body>
+</html>
