@@ -1,7 +1,7 @@
 {
   "name": "dinkdonk.no",
   "domain": "dinkdonk.no",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The dinkdonk.no website",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "watch-markup": "node node_modules/onchange/dist/bin.js 'src/markup/*' -- npm run build-markup",
     "move-assets": "mkdir -p build/fonts && rsync -a assets/fonts build && npm run generate-favicon",
     "watch-assets": "node node_modules/onchange/dist/bin.js 'assets/**/*' -- npm run move-assets",
-    "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-markup && npm run build-scss && npm run build-projects && npm run move-assets && npm run generate-favicon && npm run generate-sitemap",
+    "build": "mkdir -p build && npm run build-scheme && npm run build-ts && npm run build-markup && npm run build-scss && npm run build-projects && npm run move-assets && npm run generate-favicon && npm run generate-sitemap && npm run cache-bust",
     "test": "npm run lint",
     "serve": "node node_modules/browser-sync/dist/bin.js start --server 'build' --files 'build' & npm run watch-ts & npm run watch-scss & npm run watch-markup & npm run watch-projects & npm run watch-assets",
     "serve-no-watch": "node node_modules/browser-sync/dist/bin.js start --server 'build' --files 'build'",
@@ -24,6 +24,7 @@
     "watch-projects": "node node_modules/onchange/dist/bin.js 'src/projects/**/*' -- npm run build-projects",
     "generate-favicon": "./tools/generate-favicon.sh",
     "generate-sitemap": "node ./tools/generate-sitemap.js",
+    "cache-bust": "node tools/cache-bust.js",
     "deploy": "./tools/deploy.sh",
     "start": "npm run serve"
   },
