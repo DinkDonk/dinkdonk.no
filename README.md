@@ -5,7 +5,7 @@ The dinkdonk.no website.
 
 ### Installing
 
-Install Inkscape and GraphicsMagick
+Install Inkscape and ImageMagick
 
 ```bash
 $ brew tap homebrew/cask && brew install inkscape && brew install imagemagick
